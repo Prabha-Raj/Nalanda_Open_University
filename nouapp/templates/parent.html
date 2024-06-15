@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOU E-Gyan Portal</title>
+  <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" />
+  <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
+  <link href="{% static 'images/logo.jpeg' %}" rel="icon" />
+  <style>
+    @import url("https://www.w3cplus.com/demo/css3/base.css");
+
+    @font-face {
+      font-family: 'sansationregular';
+      src: url('https://www.w3cplus.com/demo/css3/3DAnimationDropdownMenu/sansation_regular-webfont.eot');
+      src: url('https://www.w3cplus.com/demo/css3/3DAnimationDropdownMenu/sansation_regular-webfont.eot?#iefix') format('https://www.w3cplus.com/demo/css3/3DAnimationDropdownMenu/embedded-opentype'),
+        url('https://www.w3cplus.com/demo/css3/3DAnimationDropdownMenu/sansation_regular-webfont.woff') format('woff'),
+        url('https://www.w3cplus.com/demo/css3/3DAnimationDropdownMenu/sansation_regular-webfont.ttf') format('truetype'),
+        url('https://www.w3cplus.com/demo/css3/3DAnimationDropdownMenu/sansation_regular-webfont.svg#sansationregular') format('svg');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    body {
+      background-color: #edecec;
+      overflow-x:hidden;
+    }
+
+    ul,
+    li {
+      list-style: none outside none;
+    }
+
+    /* basic menu styles */
+    .nav-menu {
+      display: block;
+      background: #74adaa;
+      width: 1085px;
+      margin: 50px auto 150px;
+    }
+
+    .nav-menu>li {
+      display: inline;
+      float: left;
+      border-right: 1px solid #94c0be;
+      position: relative;
+    }
+
+    .nav-menu>li:last-child {
+      border-right: none;
+    }
+
+    .nav-menu li a {
+      color: #fff;
+      display: block;
+      text-decoration: none;
+      font-family: 'sansationregular';
+      -webkit-font-smoothing: antialiased;
+      -moz-font-smoothing: antialiased;
+      -font-smoothing: antialiased;
+      text-transform: capitalize;
+      overflow: visible;
+      line-height: 20px;
+      font-size: 20px;
+      padding: 15px 30px 15px 31px;
+    }
+
+    /* animation domination */
+    .three-d {
+      -webkit-perspective: 200px;
+      -moz-perspective: 200px;
+      -ms-perspective: 200px;
+      -o-perspective: 200px;
+      perspective: 200px;
+      -webkit-transition: all .07s linear;
+      -moz-transition: all .07s linear;
+      -ms-transition: all .07s linear;
+      -o-transition: all .07s linear;
+      transition: all .07s linear;
+      position: relative;
+    }
+
+    .three-d:not(.active):hover {
+      cursor: pointer;
+    }
+
+    .three-d:not(.active):hover .three-d-box,
+    .three-d:not(.active):focus .three-d-box {
+      -wekbit-transform: translateZ(-25px) rotateX(90deg);
+      -moz-transform: translateZ(-25px) rotateX(90deg);
+      -o-transform: translateZ(-25px) rotateX(90deg);
+      -ms-transform: translateZ(-25px) rotateX(90deg);
+      transform: translateZ(-25px) rotateX(90deg);
+    }
+
+    .three-d-box {
+      -webkit-transition: all .3s ease-out;
+      -moz-transition: all .3s ease-out;
+      -ms-transition: all .3s ease-out;
+      -o-transition: all .3s ease-out;
+      transition: all .3s ease-out;
+      -webkit-transform: translatez(-25px);
+      -moz-transform: translatez(-25px);
+      -ms-transform: translatez(-25px);
+      -o-transform: translatez(-25px);
+      transform: translatez(-25px);
+      -webkit-transform-style: preserve-3d;
+      -moz-transform-style: preserve-3d;
+      -ms-transform-style: preserve-3d;
+      -o-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+      -webkit-pointer-events: none;
+      -moz-pointer-events: none;
+      -ms-pointer-events: none;
+      -o-pointer-events: none;
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .front {
+      -webkit-transform: rotatex(0deg) translatez(25px);
+      -moz-transform: rotatex(0deg) translatez(25px);
+      -ms-transform: rotatex(0deg) translatez(25px);
+      -o-transform: rotatex(0deg) translatez(25px);
+      transform: rotatex(0deg) translatez(25px);
+    }
+
+    .back {
+      -webkit-transform: rotatex(-90deg) translatez(25px);
+      -moz-transform: rotatex(-90deg) translatez(25px);
+      -ms-transform: rotatex(-90deg) translatez(25px);
+      -o-transform: rotatex(-90deg) translatez(25px);
+      transform: rotatex(-90deg) translatez(25px);
+      color: #FFE7C4;
+    }
+
+    .front,
+    .back {
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: crimson;
+      padding: 15px 30px 15px 31px;
+      color: white;
+      -webkit-pointer-events: none;
+      -moz-pointer-events: none;
+      -ms-pointer-events: none;
+      -o-pointer-events: none;
+      pointer-events: none;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+
+    .nav-menu li .active .front,
+    .nav-menu li .active .back,
+    .nav-menu li a:hover .front,
+    .nav-menu li a:hover .back {
+      background-color: #51938f;
+      -webkit-background-size: 5px 5px;
+      background-size: 5px 5px;
+      background-position: 0 0, 30px 30px;
+      background-image: -webit-linear-gradient(45deg, #478480 25%, transparent 25%, transparent 75%, #478480 75%, #478480), linear-gradient(45deg, #478480 25%, transparent 25%, transparent 75%, #478480 75%, #478480);
+      background-image: -moz-linear-gradient(45deg, #478480 25%, transparent 25%, transparent 75%, #478480 75%, #478480), linear-gradient(45deg, #478480 25%, transparent 25%, transparent 75%, #478480 75%, #478480);
+      background-image: -ms-linear-gradient(45deg, #478480 25%, transparent 25%, transparent 75%, #478480 75%, #478480), linear-gradient(45deg, #478480 25%, transparent 25%, transparent 75%, #478480 75%, #478480);
+      background-image: -o-linear-gradient(45deg, #478480 25%, transparent 25%, transparent 75%, #478480 75%, #478480), linear-gradient(45deg, #478480 25%, transparent 25%, transparent 75%, #478480 75%, #478480);
+      background-image: linear-gradient(45deg, #478480 25%, transparent 25%, transparent 75%, #478480 75%, #478480), linear-gradient(45deg, #478480 25%, transparent 25%, transparent 75%, #478480 75%, #478480);
+    }
+
+    .nav-menu ul {
+      position: absolute;
+      left: -40px;
+      text-align: left;
+      line-height: 40px;
+      font-size: 14px;
+      width: 200px;
+      -webkit-transition: all 0.3s ease-in;
+      -moz-transition: all 0.3s ease-in;
+      -ms-transition: all 0.3s ease-in;
+      -o-transition: all 0.3s ease-in;
+      transition: all 0.3s ease-in;
+      -webkit-transform-origin: 0px 0px;
+      -moz-transform-origin: 0px 0px;
+      -ms-transform-origin: 0px 0px;
+      -o-transform-origin: 0px 0px;
+      transform-origin: 0px 0px;
+      -webkit-transform: rotateX(-90deg);
+      -moz-transform: rotateX(-90deg);
+      -ms-transform: rotateX(-90deg);
+      -o-transform: rotateX(-90deg);
+      transform: rotateX(-90deg);
+      -webkit-backface-visibility: hidden;
+      -moz-backface-visibility: hidden;
+      -ms-backface-visibility: hidden;
+      -o-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+
+    .nav-menu>li:hover ul {
+      display: block;
+      -webkit-transform: rotateX(0deg);
+      -moz-transform: rotateX(0deg);
+      -ms-transform: rotateX(0deg);
+      -o-transform: rotateX(0deg);
+      transform: rotateX(0deg);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container-fluid p-0">
+    <div class="row"
+      style="min-height: 50px; background-color: crimson; color: white; font-family: Arial, Helvetica, sans-serif;">
+      <div class="col-lg-4" style="text-align: center; margin-top:15px; font-size: 10px;"><i
+          class="fa-spin fa-solid fa-phone"></i><b> Contact No. :- +91 75180******</b></div>
+      <div class="col-lg-4" style="text-align: center; margin-top:-20px; margin-left: 700px; font-size: 10px;"><i
+          class="fa-solid fa-envelope"></i><b> E-mail:- nouegyanhelp@gmail.com</b>
+        </div>
+
+      <div class="col-lg-12" style="border: 2px solid black; margin-top:10px; ">
+        <p style="text-align: center; margin-top:5px; font-size:12px;">For Admission and Examination related query,
+          Kindly call on University helpline Numbers 9341508580,9341508577,0612-2201013 & 0612-2206916</p>
+      </div>
+    </div>
+
+
+
+    <!--Nav bar-->
+       
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav">
+            <li>
+              <img src="{% static 'images/logo.png' %}" height="90px" style="margin-left: 50px;" />
+            </li>
+          </ul>
+          <a class="navbar-brand" href="http://www.nou.ac.in/"
+            style="font-size: 20px; margin-left:10px; margin-top:-40px; color:brown;"><b>NOU e-Gyan Portal</b></a>
+          <p style="margin-left: -200px; color:rgb(220, 22, 22); font-size: 10px;"><br><br>(A Concept by Nalanda Open
+            University)</p>
+          <div class="col-lg-4" style="text-align: center; margin-left:350px; margin-top: -40px;"><b>Follow Us :-</b>
+            <a href="https://www.facebook.com/NalandaOpenUniversity/" target="_blank"><i class="fa-brands fa-facebook"
+                style="font-size: 20px; color:black; margin-left:30px; margin-top:20px;"></i></a>
+            <a href="https://twitter.com/nalanda_univ/status/1509069559411929089" target="_blank"><i
+                class="fa-brands fa-twitter" style="font-size: 20px; margin-left:10px;  color:black;"></i></a>
+            <a href="https://api.whatsapp.com/send?phone=%2B918507486307&data_filter_required=ARA69WV3rvGwu5lEBPA9P8NWi8D4cB3eu5Od5ITusIaK77Cop6d6q6uiJAElWinXCoIL3yvKbB1HVXzLxmYiVXxQZehp_xnuiG0UradIKs3OHGNs5CGXmbI1kaTLKaPybUNxKQr43C3mC2FasXVFJOy-Lw&source=FB_Page&app=facebook&entry_point=page_cta&fbclid=IwAR1k_vKwtbURwswHiCWKMkbiZ04DWmhAPQEqRyjpWI1im6klShvSN-vrixY"
+              target="_blank"><i class="fa-brands fa-whatsapp"
+                style="font-size: 20px; margin-left:10px; color:black;"></i></a>
+            <a href="https://www.instagram.com/nalanda_univ/?hl=en" target="_blank"><i class="fa-brands fa-instagram"
+                style="font-size: 20px; margin-left:10px; color:black;"></i></a>
+            <a href="https://in.linkedin.com/school/nalanda-open-university-patna/" target="_blank"><i
+                class="fa-brands fa-linkedin" style="font-size: 20px; margin-left:10px; color:black;"></i></a>
+          </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid" style="background-color:black;">
+
+
+        
+    <!-- <div id="nav" style="width: 1065px;">
+      <ul class="nav-menu clearfix unstyled">
+        <li><a href="#" class="three-d active container-fluid"  style="width: 20px; margin-left: -50px;">
+            Nalanda Open University
+            <span class="three-d-box"><span class="front">Nalanda Open University </span><span class="back">Nalanda Open
+                University</span></span>
+          </a></li>
+        <li><a href="#" class="three-d" style="width: 90px ;">
+            Home
+            <span class="three-d-box"><span class="front">Home</span><span class="back">Home</span></span>
+          </a></li>
+        <li><a href="#" class="three-d">
+            About Us
+            <span class="three-d-box"><span class="front">About Us</span><span class="back">About Us</span></span>
+          </a></li>
+        <li><a href="#" class="three-d">
+            Registation
+            <span class="three-d-box"><span class="front">Registation</span><span class="back">Registation</span></span>
+          </a></li>
+        <li><a href="#" class="three-d">
+            Login
+            <span class="three-d-box"><span class="front">Login</span><span class="back">Login</span></span>
+          </a></li>
+        <li><a href="#" class="three-d">
+            Contact Us
+            <span class="three-d-box"><span class="front">Contact Us</span><span class="back">Contact Us</span></span>
+          </a></li>
+        <li><a href="#" class="three-d">
+            Library
+            <span class="three-d-box"><span class="front">Library</span><span class="back">Library</span></span>
+          </a>
+          <ul class="clearfix unstyled drop-menu">
+            <li><a href="#" class="three-d">
+                Tagore Library
+                <span class="three-d-box"><span class="front">Tagore Library</span><span class="back">Tagore
+                    Library</span></span>
+              </a></li>
+            <li><a href="#" class="three-d">
+                Cyber Library
+                <span class="three-d-box"><span class="front">Cyber Library</span><span class="back">Cyber
+                    Library</span></span>
+              </a></li>
+            <li><a href="#" class="three-d">
+                Coorporative Lending Library
+                <span class="three-d-box"><span class="front">Coorporative Lending Library</span><span
+                    class="back">Coorporative Lending Library</span></span>
+              </a></li>
+          </ul>
+        </li>
+        <li><a href="#" class="three-d">
+            Gallary
+            <span class="three-d-box"><span class="front">Gallary</span><span class="back">Gallary</span></span>
+          </a></li>
+      </ul>
+    </div> -->
+    
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <p style="font-size: 17px; margin-left:10px; color:rgba(8, 89, 121, 0.16)"><span
+              style="color:rgb(6, 193, 239);">WELCOME STUDENTS</p>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0" style=" margin-left:50px;">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'nouapp:index' %}"
+                style="padding: 20px;border-right: 1px solid #bbb;border-left: 1px solid #bbb; font-size: 15px; color:white;"><b>Home</b></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="{% url 'nouapp:aboutus' %}"
+                style="padding: 20px; font-size: 15px; color:white;border-right: 1px solid #bbb; margin-left:-15px;"><b>About
+                  Us</b></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="{% url 'nouapp:courses' %}"
+                style="padding: 20px; font-size: 15px; color:white; margin-left:-15px;border-right: 1px solid #bbb; "><b>Courses</b></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="{% url 'nouapp:registration' %}"
+                style="padding: 20px; font-size: 15px; color:white; margin-left:-15px;border-right: 1px solid #bbb;"><b>Registration</b></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="{% url 'nouapp:login' %}"
+                style="padding: 20px; font-size: 15px; color:white; margin-left:-15px;border-right: 1px solid #bbb;"><b>Login</b></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="{% url 'nouapp:contactus' %}"
+                style="padding: 20px; font-size: 15px; color:white; margin-left:-15px;border-right: 1px solid #bbb;"><b>Contact
+                  Us</b></a>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <i class="fa-solid fa-search" style=" font-size:30px; margin-top:5px;"></i>
+
+          </form>
+        </div>
+      </div>
+    </nav>
+
+
+
+    <!--Slider-->
+    <div id="carouselExampleCaptions" class="carousel slide">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+          aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+          aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+          aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="{% static 'images/g4.jpg' %}" height="500px" class="d-block w-100" alt="...">
+          <div class="carousel-caption d-none d-md-block">
+            <h3>Auditorium of Nalanda Open University</h3>
+            <p><mark style="color:white; background-color:blue;">All The Presentations and Meetings are Held
+                Here.</mark></p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="{% static 'images/g5.jpg' %}" height="500px" class="d-block w-100" alt="...">
+          <div class="carousel-caption d-none d-md-block">
+            <h1>Computer Lab</h1>
+            <p><mark style="color:white; background-color:rgb(9, 195, 49);">All Editing and Projects are making
+                Here.</mark></p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="{% static 'images/g6.jpg' %}" height="500px" class="d-block w-100" alt="...">
+          <div class="carousel-caption d-none d-md-block">
+            <h1>Science Lab</h1>
+            <p><mark style="color:white; background-color:crimson;">All Science Students Do Their Experiments.</mark>
+            </p>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+    {% block main %}
+
+    {% endblock main %}
+    <div class="row ">
+      <div class="col-lg-4 text-light" style="background-color: rgb(18, 170, 212); min-height: 300px;">
+        <img src="{% static 'images/logo.png' %}" height="130px"
+          style="margin-top: 20px; border-radius:100px; margin-left:200px;" />
+        <p style="font-size: 18px; text-align:center; margin-left:10px; margin-top:10px;">Nalanda Open University is a
+          State Open University duly established under the Act of Bihar Government and is also recognized by Distance
+          Education Council, IGNOU, Maidan Garhi, New Delhi.</p>
+      </div>
+      <div class="col-lg-2" style="background-color: brown; min-height: 250px;">
+        <h2 style="margin-top: 30px; color:white;">Useful Links</h2>
+        <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="75"
+          aria-valuemin="0" aria-valuemax="100" style="height:5px;">
+          <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 75%"></div>
+        </div>
+        <ul style="font-size: 20px; margin-top: -20px;" class="mainnav"><br>
+          <li style=" list-style-type:none; margin-left:-20px;"><a href="{% url 'nouapp:index' %}"
+              style="text-decoration: none; color:white;"><i class="fa-solid fa-arrow-right"></i> Home</a></li>
+          <li style=" list-style-type:none; margin-left:-20px;"><a href="{% url 'nouapp:aboutus' %}"
+              style="text-decoration: none; color:white;"><i class="fa-solid fa-arrow-right"></i> About Portal</a></li>
+          <li style=" list-style-type:none; margin-left:-20px;"><a href="{% url 'nouapp:services' %}"
+              style="text-decoration: none; color:white;"><i class="fa-solid fa-arrow-right"></i> Services</a></li>
+          <li style=" list-style-type:none; margin-left:-20px;"><a href="{% url 'nouapp:contactus' %}"
+              style="text-decoration: none; color:white;"><i class="fa-solid fa-arrow-right"></i> Contact us</a></li>
+          <li style=" list-style-type:none; margin-left:-20px;"><a href="{% url 'nouapp:courses' %}"
+              style="text-decoration: none; color:white;"><i class="fa-solid fa-arrow-right"></i> Courses</a></li>
+          <li style=" list-style-type:none; margin-left:-20px;"><a href="#"
+              style="text-decoration: none; color:white;"><i class="fa-solid fa-arrow-right"></i> Study Centre</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3" style="background-color: brown; min-height: 250px;">
+        <h2 style="margin-top: 30px; color:white;">Subscribe</h2>
+        <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="75"
+          aria-valuemin="0" aria-valuemax="100" style="height:5px; width: 60%;">
+          <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 70%"></div>
+        </div>
+        <p style="font-size: 20px; color:white; margin-top:10px;">Fill the detail below to receive the manual of the NOU
+          e-Gyan Portal</p>
+        <form method="post" action="{% url 'nouapp:email' %}">
+          {% csrf_token %}
+          <table>
+            <tr>
+              <td>
+                <input type="email" class="form-control" placeholder="Email Address" name="emailaddress;"
+                  style="background-color: gray; color:black;" />
+              </td>
+              <td>
+                <button type="submit">
+                  <i class="fa-solid fa-paper-plane" style="font-size: 30px;"></i>
+                </button>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+      <div class="col-lg-3 text-light" style="background-color: rgb(14, 91, 198); min-height: 250px;">
+        <h2 style="margin-top: 30px; color:rgb(255, 255, 255);">Contact info</h2>
+        <div class="progress" role="progressbar" aria-label="Animated striped example" aria-valuenow="75"
+          aria-valuemin="0" aria-valuemax="100" style="height:5px;width: 70%;">
+          <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 70%;"></div>
+        </div>
+        <i class="fa-solid fa-location-dot" style=" margin-top:20px;">&nbsp; <a
+            href="https://www.google.com/maps/place/Nalanda+Open+University/@25.617167,85.13877,17z/data=!3m2!4b1!5s0x398e4a23dfa5924f:0xe1a5aeac2055a418!4m6!3m5!1s0x39ed585a72898067:0x332ef319c1947f5e!8m2!3d25.617167!4d85.1413449!16s%2Fm%2F03b_5nc?entry=ttu"
+            style="text-decoration: none; color:white; margin-top:10px;">NOU</a></i>
+        <i class="fa-shake fa-solid fa-phone"></i>+91 751808****
+        <h5>Give us a call</h5>
+        <a href="https://www.facebook.com/NalandaOpenUniversity/" target="_blank"><i class="fa-brands fa-facebook"
+            style="font-size: 40px; color:white; margin-left:30px;"></i></a>
+        <a href="https://twitter.com/nalanda_univ/status/1509069559411929089" target="_blank"><i
+            class="fa-brands fa-twitter" style="font-size: 40px; margin-left:10px;  color:white;"></i></a>
+        <a href="https://api.whatsapp.com/send?phone=%2B918507486307&data_filter_required=ARA69WV3rvGwu5lEBPA9P8NWi8D4cB3eu5Od5ITusIaK77Cop6d6q6uiJAElWinXCoIL3yvKbB1HVXzLxmYiVXxQZehp_xnuiG0UradIKs3OHGNs5CGXmbI1kaTLKaPybUNxKQr43C3mC2FasXVFJOy-Lw&source=FB_Page&app=facebook&entry_point=page_cta&fbclid=IwAR1k_vKwtbURwswHiCWKMkbiZ04DWmhAPQEqRyjpWI1im6klShvSN-vrixY"
+          target="_blank"><i class="fa-brands fa-whatsapp"
+            style="font-size: 40px; margin-left:10px; color:white;"></i></a>
+        <a href="https://www.instagram.com/nalanda_univ/?hl=en" target="_blank"><i class="fa-brands fa-instagram"
+            style="font-size: 40px; margin-left:10px; color:white;"></i></a>
+        <a href="https://in.linkedin.com/school/nalanda-open-university-patna/" target="_blank"><i
+            class="fa-brands fa-linkedin" style="font-size: 40px; margin-left:10px; color:white;"></i></a>
+      </div>
+    </div>
+    <div class="row bg-danger">
+      <div class="col-lg-12">
+        <p style="text-align: center; margin-top:5px;"><i class="text-light">&copy; copyright 2022-2023 all rights
+            reserved by &nbsp;<b>Nalanda nalanda-open-university Patna (Bihar)</b></i></p>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+{% extends "parent.html" %}
+{% load static %}
+{% block main %}
+<div class="row mt-2">
+    <div class="col-sm-5" style="background-color: white; min-height: 600px;">
+        <h5 style="margin-left:200px; margin-top:50px; font-family:garamond;">ABOUT<b><hr style="margin-top:-10px; margin-left:100px; width: 100px; color:red;"></h5></b>
+        <h1 style="margin-left:200px; font-family:garamond; color:red;" ><b>ABOUT PORTAL</b></h1>
+        <img src="{% static 'images/about.png' %}" style="height:350px; width:400px; margin-left:200px;"/>
+    </div>
+    <div class="col-sm-7" style="background-color:white; min-height: 600px; ">
+        <p style="margin-top: 100px; font-size:18px;">The objective to design the portal is to facilitate “E-learning System to the students for<br> the learning purpose from a remote location". The Portal is a Secure, Robust Web<br> Application for E-Learning.</p>
+<p style="margin-top: 20px; font-size:18px;">NOU-E-Gyan Portal is a Learning Management System (LMS) for the colleges/<br> institutions / study centers for their unstoppable teaching to their students in the current<br> crisis situation & in future as well since we all are now experiencing a paradigm shift.<br> The portal is user friendly & easy to access.</p>
+<p style="margin-top: 20px; font-size:18px;">The portal is accessible from any hook and corner of the world if the system allows the<br> permission of its users. It is fully secured and accessible 24 x 7 to its authorised users. It <br>will resolve the academic issues such as E-content Distribution, Delivery, Tracking,<br> Assessment, Progress Monitoring & Controlling of all stakeholders of the portal i.e.<br> students, teachers, study centre administrators as well as Nalanda Open University<br> Admins when they are at a distance.</p>
+    </div>
+</div>
+{% endblock main %}

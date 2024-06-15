@@ -1,0 +1,66 @@
+{% extends "studentparent.html" %}
+{% block body %}
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 style="text-align:center;">Student Profile</h1>
+            <form class="form-group" action="{% url 'studentapp:viewprofile' %}" method="post">   
+                {% csrf_token %}
+              <table class="table table-bordered text-light" style="margin:auto; width:50%;">
+                <tr>
+                    <td>Roll No.</td>
+                    <td>{{stu.rollno}}</td>
+                </tr>
+                <tr>
+                    <td>Student Name</td>
+                    <td>{{stu.name}}</td>
+                </tr>
+                <tr>
+                    <td>Father Name</td>
+                    <td>{{stu.fname}}</td>
+                </tr>
+                <tr>
+                    <td>Mother Name</td>
+                    <td>{{stu.mname}}</td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td>{{stu.gender}}</td>
+                </tr>
+                <tr>
+                    <td>Course Type</td>
+                    <td>{{stu.program}}</td>
+                </tr>
+                <tr>
+                    <td>Branch Name</td>
+                    <td>{{stu.branch}}</td>
+                </tr>
+                <tr>
+                    <td>Year</td>
+                    <td>{{stu.year}}</td>
+                </tr>
+                <tr>
+                    <td>Contact No.</td>
+                    <td>{{stu.contactno}}</td>
+                </tr>
+                <tr>
+                    <td>E-mail Address</td>
+                    <td>{{stu.emailaddress}}</td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td>{{stu.address}}</td>
+                </tr>
+                <tr>
+                    <td>Registration Date</td>
+                    <td>{{stu.regdate}}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button class="btn btn-success" type="submit">Edit</button>
+                    </td>
+                </tr>
+              </table>
+        </div>
+    </div>
+{% endblock body %}

@@ -1,0 +1,65 @@
+{% extends "studentparent.html" %}
+{% block body %}
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 style="text-align:center;">Manage Profile</h1>   
+            <form class="form-group" action="{% url 'studentapp:profilemanagement' %}" method="post">
+                {% csrf_token %}
+            <table class="table" style="width:50%; margin:auto;">
+                <tr>
+                    <td style="font-size: 20px">Roll No.</td>
+                    <td><input class="form-control" type="number" style="background-color: white; color:black;" readonly name="rollno" value="{{stu.rollno}}"/></td>
+                </tr>
+                <tr>
+                    <td style="font-size: 20px">Name</td>
+                    <td><input class="form-control" type="text" style="background-color: white; color:black;" readonly name="name" value="{{stu.name}}" /></td>
+                </tr>
+                <tr>
+                    <td style="font-size: 20px">Father Name</td>
+                    <td><input class="form-control" type="text" style="background-color: white; color:black;" readonly name="fname" value="{{stu.fname}}"/></td>
+                </tr>
+                <tr>
+                    <td style="font-size: 20px">Mother Name</td>
+                    <td><input class="form-control" type="text" style="background-color: white; color:black;" readonly name="mname" value="{{stu.mname}}" /></td>
+                </tr>
+                <tr>
+                    <td style="font-size: 20px">Gender</td>
+                    <td><input class="form-control" type="text" style="background-color: white; color:black;" readonly name="gender" value="{{stu.gender}}" /></td>
+                </tr>
+                <tr>
+                    <td style="font-size: 20px">Course Type</td>
+                    <td><input class="form-control" type="text" style="background-color: white; color:black;" readonly name="program" value="{{stu.program}}" /></td>
+                </tr>
+                <tr>
+                    <td style="font-size: 20px">Branch</td>
+                    <td><input class="form-control" type="text" style="background-color: white; color:black;" readonly name="branch" value="{{stu.branch}}" /></td>
+                </tr>
+                <tr>
+                    <td style="font-size: 20px">Year</td>
+                    <td><input class="form-control" type="text" style="background-color: white; color:black;" readonly name="year" value="{{stu.year}}" /></td>
+                </tr>
+                <tr>
+                    <td style="font-size: 20px">Contact No.</td>
+                    <td><input class="form-control" type="text" style="background-color: white; color:black;" name="contactno" value="{{stu.contactno}}" /></td>
+                </tr>
+                <tr>
+                    <td style="font-size: 20px">Email Address</td>
+                    <td><input class="form-control" type="text" style="background-color: white; color:black;" name="emailaddress" value="{{stu.emailaddress}}" /></td>
+                </tr>
+                <tr>
+                    <td style="font-size: 20px">Address</td>
+                    <td><input class="form-control" type="text" style="background-color: white; color:black;" name="address" value="{{stu.address}}" /></td>
+                </tr>
+                <tr>
+                    <td style="font-size: 20px">Registration Date</td>
+                    <td><input class="form-control" type="text" style="background-color: white; color:black;" readonly name="regdate" value="{{stu.regdate}}" /></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button class="btn btn-primary" type="submit">Update</button></td>
+                </tr>
+            </table>
+        </form>
+        </div>
+    </div>
+{% endblock body %}

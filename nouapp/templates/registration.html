@@ -1,0 +1,202 @@
+{% extends "parent.html" %}
+{% block main %}
+<div class="row" style="height: 1400px;">
+    <div class="col-lg-12" style="background-color:white; min-height: 1400px; ">
+<style>
+    mark{
+        /* background-colors: blue; */
+        color:white;
+    }
+</style>
+<script>
+    function validate()
+    {
+        var rollno=document.getElementById("rollno");
+        var name=document.getElementById("name");
+        var fname=document.getElementById("fname");
+        var mname=document.getElementById("mname");
+        var con=document.getElementById("con");
+        var email=document.getElementById("email");
+        var emailexp=/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+        var pass=document.getElementById("pass");
+        var confirmpass=document.getElementById("confirmpass");
+        if (rollno.value==""||rollno.value==null)
+        {
+            alert("Please Enter Your Roll Number");
+            rollno.focus();
+        }
+        else if(isNaN(rollno.value))
+        {
+            alert("Please Enter Numbers Only");
+            rollno.focus();
+        }
+        else if (name.value==""||name.value==null)
+        {
+            alert("Please Enter Your Name");
+            name.focus();
+        }
+        else if (fname.value==""||fname.value==null)
+        {
+            alert("Please Enter Your Father's Name");
+            fname.focus();
+        }
+        else if (mname.value==""||mname.value==null)
+        {
+            alert("Please Enter Your Mother's Name");
+            mname.focus();
+        }
+        else if (con.value==""||con.value==null)
+        {
+            alert("Please Enter Contact Number");
+            con.focus();
+        }
+        else if(isNaN(con.value))
+        {
+            alert("Please Enter Numbers Only");
+            con.focus();
+        }
+        else if (con.value.length!=10)
+        {
+            alert("Please Enter 10 Digit Number");
+            con.focus();
+        }
+        else if(email.value==""|| email.value==null)
+        {
+            alert("Please Enter Email Address");
+            email.focus();
+        }
+        else if(!emailexp.test(email.value))
+        {
+            alert("Please Enter Valid E-mail Address");
+            email.focus();
+        }
+        else if(pass.value==""||pass.value==null)
+        {
+            alert("Please Enter Your Password");
+            pass.focus();
+        }
+        else if(pass.value.length<8)
+        {
+            alert("Please Enter Atleast 8 characters");
+            pass.focus();
+        }
+        else if(confirmpass.value==""||confirmpass.value==null)
+        {
+            alert("Please Confirm Your Password");
+            confirmpass.focus();
+        }
+        else if(confirmpass.value!=pass.value)
+        {
+            alert("Confirm Password is not matched");
+            confirmpass.focus();
+        }
+        else
+        {
+            document.getElementById("frm").submit();
+        }
+    }
+</script>
+{% if messages %}
+   {% for message in messages %}
+   <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>{{message}}</strong> 
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+   {% endfor %}
+{% endif %}
+<b style="font-size:50px; color: white; font-family:calibri; margin-left:390px; text-shadow: 10px 10px 20px black;"><u>Student's Registration Form</u></b>
+<div style="background-color: white; width:700px; margin:15px auto; border: 2PX solid white;  box-shadow: 10px 20px 50px black; border-radius: 40px 40px 40px 40px;">
+<form class="form-group" method="post" action="{% url 'nouapp:registration' %}" onsubmit="event.preventDefault();validate();" id="frm">
+    {% csrf_token %}
+    <table class="table" style=" margin:auto; width: 80%;">
+        <tr>
+            <td>Enter Roll Number
+                <input type="text" name="rollno" placeholder="Enter Your Roll Number" class="form-control" id="rollno" style="border: 1px solid #555;background-color: skyblue; color: black;" />
+            </td>
+        </tr>
+        <tr>
+            <td>Enter Your Name
+                <input type="text" name="name" placeholder="Enter your Name" class="form-control" id="name" style="border: 1px solid #555;background-color: skyblue; color: black;"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Enter Your Father's Name
+                <input type="text" name="fname" placeholder="Enter your Father's Name" class="form-control" id="fname" style="border: 1px solid #555;background-color: skyblue; color: black;"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Enter Your Mother's Name
+                <input type="text" name="mname" placeholder="Enter your Mother's Name" class="form-control" id="mname"/ style="border: 1px solid #555;background-color: skyblue; color: black;">
+            </td>
+        </tr>
+        <tr>
+            <td>Select Gender<br>
+                <input type="radio" name="gender" value="male" class="form-check-input" style="border: 1px solid #555;background-color: skyblue; color: black;"/>Male &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="gender" value="female" class="form-check-input" style="border: 1px solid #555;background-color: skyblue; color: black;"/>Female
+            </td>
+        </tr>
+        <tr>
+            <td>Enter your Address
+                <textarea rows="10" placeholder="Enter Address" name="address" class="form-control" style="border: 1px solid #555;background-color: skyblue; color: black;"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td>Select Program
+                <select name="program" class="form-control" id="program" style="border: 1px solid #555;background-color: skyblue; color: black;">
+                    <option selected>--Select Program--</option>
+                    {% for p in program %}
+                    <option value="{{p.program}}">{{p.program}}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Select Branch
+                <select class="form-control" name="branch" id="branch" style="border: 1px solid #555;background-color: skyblue; color: black;">
+                    <option selected>--Select Branch--</option>
+                    {% for b in branch %}
+                    <option value="{{b.branch}}">{{b.branch}}</option>
+                    {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>Select Year
+                <select name="year" class="form-control" id="year" style="border: 1px solid #555;background-color: skyblue; color: black;">
+                    <option selected>--Select Year--</option>
+                    {% for y in year %}
+                    <option value="{{y.year}}">{{y.year}}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Enter Your Contact Number
+                <input type="text" name="contactno" class="form-control" placeholder="Enter Your Contact Number" id="con" style="border: 1px solid #555;background-color: skyblue; color: black;"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Enter E-mail Address
+                <input type="text" name="emailaddress" placeholder="Enter E-mail Address" class="form-control" id="email" style="border: 1px solid #555;background-color: skyblue; color: black;"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Enter Your Password
+                <input type="password" name="password" class="form-control" placeholder="Enter Your Password" id="pass" style="border: 1px solid #555;background-color: skyblue; color: black;"/>
+            </td>
+        </tr>
+        <tr>
+            <td>Confirm Password
+                <input type="password" name="confirmpassword" class="form-control" placeholder="Confirm Password" id="confirmpass" style="border: 1px solid #555;background-color: skyblue; color: black;"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit" class="btn btn-outline-info" style="margin-top:10px; width:600px;">Submit</button>
+            </td>
+        </tr>
+    </table>
+</form>
+</div>
+</div>
+</div>
+{% endblock main %}

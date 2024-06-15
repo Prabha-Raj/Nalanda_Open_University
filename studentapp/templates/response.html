@@ -1,0 +1,47 @@
+{% extends "studentparent.html" %}
+{% block body %}
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 style="text-align:center;">Submit Your Feedback/Complaint</h1>
+            {% if messages %}
+   {% for message in messages %}
+   <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>{{message}}</strong> 
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+   {% endfor %}
+{% endif %}
+            <form class="form-group" method="post" action="{% url 'studentapp:response' %}">
+                {% csrf_token %}
+                <table class="table table-bordered text-light" style="margin: auto; width:80%; margin-top:20px; ">
+                    <tr>
+                        <td>Select Response Type</td>
+                        <td>
+                            <select name="responsetype" class="form-control" style="color: white;">
+                                <option selected>--Select Response Type--</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="complaint">Complaint</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Enter Subject</td>
+                        <td>
+                            <input type="text" name="subject" class="form-control"  style="color: white;" placeholder="Enter Subject Of Your Response"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Type Response Text</td>
+                        <td><textarea rows="5" name="responsetext" class="form-control" style="color:white" placeholder="Explain Your Response Here"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+{% endblock body %}

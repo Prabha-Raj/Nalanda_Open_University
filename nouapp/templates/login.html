@@ -1,0 +1,80 @@
+{% extends "parent.html" %}
+{% load static %}
+{% block main %}
+<div class="row">
+    <div class="col-sm-3" style="background-color: aqua; min-height: 500px;  ">
+    <h1 style="text-align: center;">Letest News </h1>
+    <br><br>
+    <marquee behavior="alternate" direction="up" style="min-height: 500px;">
+    {% for n in ns %}
+        <p  style="padding-left: 5px; color: red; font-family: calibri; font-size: 30px;">{{n.newstext}} </p>
+    {% endfor %}
+</marquee>
+    </div>
+    <div class="col-sm-9" style="background-color:darkblue; min-height: 600px; ">
+        <script>
+    function validate()
+    {
+        var userid=document.getElementById("userid");
+        var password=document.getElementById("password");
+        if(userid.value==""|| userid.value==null)
+        {
+            alert("Please Enter User Id");
+            userid.focus();
+        }
+        else if(password.value==""|| password.value==null)
+        {
+            alert("Please Enter Password");
+            password.focus(); 
+        }
+        else
+        {
+            document.getElementById("frmlogin").submit();
+        }
+    }
+</script>
+{% if messages %}
+   {% for message in messages %}
+   <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>{{message}}</strong> 
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+   {% endfor %}
+{% endif %}
+<marquee direction="right" scrollamount="10" behavior="alternate" style="color:chocolate;  font-family:Calibiri; font-size:70px;"><u>Login Form</u></marquee>
+<img src="{% static 'images/download.png' %}" style="margin: 100px;"/>
+<form class="form-group" id="frmlogin" onsubmit="event.preventDefault();validate();" method="post" action="{% url 'nouapp:login' %}">
+    {% csrf_token %}
+    <table style="width: 80px; margin:auto; margin-left:500px; margin-top:-320px;">
+        <tr>
+            <td><b style="color:white">Enter Roll Number/User ID</b>
+                <input type="text" placeholder="Enter Roll Number/User Id" id="userid" name="userid" class="form-control"style="border: 1px solid #555;background-color: skyblue; color: black
+        ; width:500px;"/>
+            </td>
+        </tr>
+        <tr>
+            <td><b style="color:white">Enter Your Password</b>
+                <input type="password" name="password" class="form-control" id="password" placeholder="Enter Your Password"style="border: 1px solid #555;background-color: skyblue; color: black
+        ; width:500px;"/>
+            </td>
+        </tr>
+        <tr>
+            <td><b style="color:white">Select Usertype</b>
+                <select name="usertype" class="form-control"style="border: 1px solid #555;background-color: skyblue; color: black
+        ; width:500px;">
+                    <option selected>--Select UserType--</option>
+                    <option value="admin">Admin</option>
+                    <option value="student">Student</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;
+                <button type="submit" class="btn btn-dark" style="margin-top: 10px; margin-left:200px;">Login</button>
+            </td>
+        </tr>
+    </table>
+</form>
+</div>
+</div>
+{% endblock main %}
